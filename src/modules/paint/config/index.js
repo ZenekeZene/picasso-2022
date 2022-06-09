@@ -1,5 +1,5 @@
 const options = {
-  size: 32,
+  size: 16,
   thinning: 0.5,
   smoothing: 0.5,
   streamline: 0.5,

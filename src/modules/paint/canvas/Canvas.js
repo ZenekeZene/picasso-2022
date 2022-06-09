@@ -1,14 +1,22 @@
-import Painter from 'modules/paint/painter/Painter'
+import { useRef } from 'react'
+import usePainter from 'modules/paint/painter/usePainter'
 
 const Canvas = () => {
+  const canvasRef = useRef(null)
+  const {
+    handlePointerDown,
+    handlePointerMove
+  } = usePainter({ target: canvasRef })
+
   return (<>
-    <Painter />
-      <canvas
-        width="1698"
-        height="1028"
-      ></canvas>
-    </>
-  )
+    <canvas
+      ref={ canvasRef }
+      width="600"
+      height="600"
+      onPointerDown={ handlePointerDown }
+      onPointerMove={ handlePointerMove }
+    ></canvas>
+  </>)
 }
 
 export default Canvas
