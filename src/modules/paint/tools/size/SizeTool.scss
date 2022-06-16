@@ -1,0 +1,20 @@
+.size-tool {
+  position: relative;
+  display: flex;
+  align-items: center;
+
+  &__range {
+    width: 11rem;
+    padding: 0 1rem;
+  }
+
+  &__preview {
+    position: absolute;
+    left: 100%;
+    display: inline-block;
+    min-width: 1rem;
+    min-height: 1rem;
+    margin-left: 1rem;
+    border-radius: 50%;
+  }
+}

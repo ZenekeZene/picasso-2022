@@ -1,13 +1,12 @@
-import Canvas from 'modules/paint/canvas/Canvas'
+import Painter from 'modules/paint/painter/Painter'
 
 export const path = '/'
 
 const Home = () => {
   return (
     <article>
-      <h1>Home</h1>
-      <img src="/selfi.jpeg" className="selfi" width="600" height="600" />
-      <Canvas />
+      <h1 className="heading">Picasso</h1>
+      <Painter />
     </article>
   )
 }
