@@ -3,6 +3,7 @@ import './BrushTool.scss'
 
 const brushes = [
   'pencil',
+  'pen',
   'quill',
   'paint-format',
   '🍬',
@@ -15,18 +16,18 @@ const BrushTool = ({ onBrush }) => {
 
   useEffect(() => {
     onBrush(currentBrush)
-  }, [currentBrush])
+  }, [currentBrush, onBrush])
 
   return (
     <ul className="brush-tool">
-      { brushes.slice(0, 3).map((brush, index) =>
+      { brushes.slice(0, 4).map((brush, index) =>
         <li
           key={ `brush-${index}` }
           className={ `icon-${brush}` }
           onClick={ () => { setCurrentBrush(brush) }}
         />
       )}
-      { brushes.slice(3, 6).map((brush, index) =>
+      { brushes.slice(4, 7).map((brush, index) =>
         <li
           key={ `brush-${index}` }
           onClick={ () => { setCurrentBrush(brush) }}

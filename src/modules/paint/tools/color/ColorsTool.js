@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import './ColorsTool.scss'
 
-const colors = [
+export const colors = [
   '#008f7a',
   '#845ec2',
   '#d65db1',
@@ -16,7 +16,7 @@ const ColorsTool = ({ onColor }) => {
 
   useEffect(() => {
     onColor(currentColor)
-  }, [currentColor])
+  }, [currentColor, onColor])
 
   return (
     <div className="color-tool">

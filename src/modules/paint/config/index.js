@@ -1,6 +1,6 @@
 const options = {
   pencil: {
-    size: 1,
+    size: 10,
     thinning: 0.1,
     smoothing: 1,
     streamline: 1,
@@ -16,6 +16,7 @@ const options = {
       cap: true
     },
   },
+  pen: { size: 16, },
   quill: {
     size: 16,
     thinning: -0.99,
@@ -33,7 +34,7 @@ const options = {
       cap: true
     },
   },
-  ['paint-format']: {
+  'paint-format': {
     size: 16,
     thinning: 0.1,
     smoothing: 0.5,
@@ -51,7 +52,7 @@ const options = {
     },
     opacity: 0.5,
   },
-  ['🍬']: {
+  '🍬': {
     size: 16,
     thinning: -0.99,
     smoothing: 0.99,
@@ -69,7 +70,7 @@ const options = {
     },
     blop: true
   },
-  ['🥶']: {
+  '🥶': {
     size: 16,
     thinning: -0.99,
     smoothing: 0.99,
@@ -87,7 +88,7 @@ const options = {
     },
     effect: true
   },
-  ['✨']: {
+  '✨': {
     size: 16,
     thinning: -0.99,
     smoothing: 0.99,

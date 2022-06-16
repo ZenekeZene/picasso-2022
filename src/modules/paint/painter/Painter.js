@@ -2,6 +2,7 @@ import { useRef, useState, useCallback } from 'react'
 import { getStroke } from 'perfect-freehand'
 import options from 'modules/paint/config'
 import Tools from 'modules/paint/tools/Tools'
+import { colors } from 'modules/paint/tools/color/ColorsTool'
 import { getSvgPathFromStroke } from 'modules/paint/render'
 import GlowFilter from '../filters/GlowFilter'
 import EffectFilter from '../filters/EffectFilter'
@@ -31,9 +32,9 @@ function createPath (pointer, size, color, options) {
 
 const Painter = () => {
   const canvas = useRef(null)
-  const [brush, setBrush] = useState(null)
-  const [color, setColor] = useState(null)
-  const [size, setSize] = useState(1)
+  const [brush, setBrush] = useState('pencil')
+  const [color, setColor] = useState(colors[0])
+  const [size, setSize] = useState(10)
   const [pointer, setPointer] = useState(0)
   const [history, setHistory] = useState([])
   const [currentPath, setCurrentPath] = useState(null)
@@ -74,7 +75,7 @@ const Painter = () => {
     path.setAttribute('d', getSvgPathFromStroke(getStroke(config.points, options[config.brush])))
     canvas.current.appendChild(path)
     setPointer(oldPointer => oldPointer + 1)
-  }, [pointer])
+  }, [pointer, history])
 
   const handleDelete = useCallback(() => {
     const paths = canvas.current.getElementsByTagName('path')
@@ -99,6 +100,7 @@ const Painter = () => {
       color={ color }
       onColor={ setColor }
       onBrush={ setBrush }
+      size={ size }
       onSize={ setSize }
       onUndo={ handleUndo }
       onRedo={ handleRedo }

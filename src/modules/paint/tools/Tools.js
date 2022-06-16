@@ -4,7 +4,7 @@ import SizeTool from 'modules/paint/tools/size/SizeTool'
 import BrushTool from 'modules/paint/tools/brush/BrushTool'
 import './Tools.scss'
 
-const Tools = ({ color, onColor, onBrush, onSize, onUndo, onRedo, onDelete }) => {
+const Tools = ({ color, onColor, onBrush, size, onSize, onUndo, onRedo, onDelete }) => {
   const [isToolsVisibled, setIsToolsVisibled] = useState(false)
   return (
     <section className="tools">
@@ -14,6 +14,7 @@ const Tools = ({ color, onColor, onBrush, onSize, onUndo, onRedo, onDelete }) =>
       { isToolsVisibled && (<>
         <ColorsTool onColor={ onColor } />
         <SizeTool
+          size={ size }
           color={ color }
           onSize={ onSize }
         />
