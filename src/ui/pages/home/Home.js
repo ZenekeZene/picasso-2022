@@ -5,7 +5,6 @@ export const path = '/'
 const Home = () => {
   return (
     <article>
-      <h1 className="heading">Picasso</h1>
       <Painter />
     </article>
   )

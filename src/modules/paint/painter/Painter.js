@@ -82,7 +82,6 @@ const Painter = () => {
   }, [])
 
   return (<>
-    <p>{ pointer }</p>
     <svg
       className="canvas-svg"
       ref={ canvas }
