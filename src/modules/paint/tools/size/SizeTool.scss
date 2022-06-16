@@ -3,9 +3,14 @@
   display: flex;
   align-items: center;
 
+  &__value {
+    min-width: 3ch;
+    text-align: left;
+    font-weight: 700;
+  }
+
   &__range {
     width: 11rem;
-    padding: 0 1rem;
   }
 
   &__preview {

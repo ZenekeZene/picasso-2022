@@ -16,12 +16,12 @@ const SizeTool = ({ color, onSize }) => {
 
   return (
     <section className="size-tool">
-      <span>{ currentSize }</span>
+      <span className="size-tool__value">{ currentSize }</span>
       <input
         className="size-tool__range"
         type="range"
         min="1"
-        max="100"
+        max="70"
         value={ currentSize }
         onChange={ (event) => { setCurrentSize(event.target.value) }}
       ></input>

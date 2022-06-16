@@ -1,9 +1,6 @@
 .color-tool {
   display: inline;
-
-  & > * {
-
-  }
+  pointer-events: auto;
 
   &__swatches {
     display: inline-flex;

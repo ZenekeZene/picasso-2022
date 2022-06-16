@@ -20,7 +20,6 @@ const ColorsTool = ({ onColor }) => {
 
   return (
     <div className="color-tool">
-      <span className="icon"></span>
       <ol className="color-tool__swatches">
         { colors.map((color, index) => (
           <li
