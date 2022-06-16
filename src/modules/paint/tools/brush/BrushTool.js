@@ -7,7 +7,6 @@ const brushes = [
   'quill',
   'paint-format',
   '🍬',
-  '🥶',
   '✨'
 ]
 

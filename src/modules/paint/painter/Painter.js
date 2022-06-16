@@ -5,7 +5,6 @@ import Tools from 'modules/paint/tools/Tools'
 import { colors } from 'modules/paint/tools/color/ColorsTool'
 import { getSvgPathFromStroke } from 'modules/paint/render'
 import GlowFilter from '../filters/GlowFilter'
-import EffectFilter from '../filters/EffectFilter'
 import BlopFilter from '../filters/BlopFilter'
 import './Painter.scss'
 
@@ -92,7 +91,6 @@ const Painter = () => {
     >
       <defs>
         <GlowFilter />
-        <EffectFilter />
         <BlopFilter />
       </defs>
     </svg>

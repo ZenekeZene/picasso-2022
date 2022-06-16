@@ -2,8 +2,8 @@ const options = {
   pencil: {
     size: 10,
     thinning: 0.1,
-    smoothing: 1,
-    streamline: 1,
+    smoothing: 0,
+    streamline: 0,
     easing: (t) => t,
     start: {
       taper: 10,
@@ -16,7 +16,13 @@ const options = {
       cap: true
     },
   },
-  pen: { size: 16, },
+  pen: {
+    size: 20,
+    thinning: 2,
+    smoothing: 1,
+    streamline: 0,
+    easing: (t) => t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2,
+  },
   quill: {
     size: 16,
     thinning: -0.99,
@@ -55,8 +61,8 @@ const options = {
   '🍬': {
     size: 16,
     thinning: -0.99,
-    smoothing: 0.99,
-    streamline: 0.99,
+    smoothing: 0,
+    streamline: 0,
     easing: (t) => t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2,
     start: {
       taper: 89,

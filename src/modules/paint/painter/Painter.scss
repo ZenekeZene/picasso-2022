@@ -12,14 +12,12 @@
 }
 
 .with-glow {
-  // filter: url(#glow);
-  filter: drop-shadow(9px 11px 8px rgba(0, 0, 0, 0.4));
-}
-
-.with-effect {
-  filter: url(#effect);
+  filter: url(#drop-shadow);
+  // filter: drop-shadow(9px 11px 8px rgba(0, 0, 0, 0.4)); 1)
 }
 
 .with-blop {
   filter: url(#blop);
 }
+
+// It doesnt work with safari.
