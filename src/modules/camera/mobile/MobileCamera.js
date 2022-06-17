@@ -24,7 +24,7 @@ const MobileCamera = () => {
 
     { /* displays the picture uploaded from the native camera */ }
     <img
-      alt="Selfi photo"
+      alt="Espacio disponible para albergar retratos del usuario"
       src={ imageSrc }
     />
   </>)
