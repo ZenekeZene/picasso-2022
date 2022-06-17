@@ -1,10 +1,11 @@
 import { useState } from 'react'
+import CameraTool from 'modules/paint/tools/camera/CameraTool'
 import ColorsTool from 'modules/paint/tools/color/ColorsTool'
 import SizeTool from 'modules/paint/tools/size/SizeTool'
 import BrushTool from 'modules/paint/tools/brush/BrushTool'
 import './Tools.scss'
 
-const Tools = ({ color, onColor, onBrush, size, onSize, onUndo, onRedo, onDelete }) => {
+const Tools = ({ color, onColor, onBrush, size, isCameraEnabled, onSize, onUndo, onRedo, onDelete, onStartCamera, onTakeThePhoto }) => {
   const [isToolsVisibled, setIsToolsVisibled] = useState(false)
   return (
     <section className="tools">
@@ -20,6 +21,11 @@ const Tools = ({ color, onColor, onBrush, size, onSize, onUndo, onRedo, onDelete
         />
         <BrushTool
           onBrush={ onBrush }
+        />
+        <CameraTool
+          isEnabled={ isCameraEnabled }
+          onStartCamera={ onStartCamera }
+          onTakeThePhoto={ onTakeThePhoto }
         />
         <span className="icon-reply" onClick={ onUndo } />
         <span className="icon-forward" onClick={ onRedo } />

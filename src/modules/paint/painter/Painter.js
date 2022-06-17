@@ -8,6 +8,9 @@ import GlowFilter from '../filters/GlowFilter'
 import BlopFilter from '../filters/BlopFilter'
 import './Painter.scss'
 
+const WIDTH = 1280
+const HEIGHT = 960
+
 function createPath (pointer, size, color, options) {
   const path = document.createElementNS('http://www.w3.org/2000/svg', 'path')
   path.setAttribute('stroke', color)
@@ -30,7 +33,10 @@ function createPath (pointer, size, color, options) {
 }
 
 const Painter = () => {
+  const [cameraEnabled, enableCamera] = useState(false)
   const canvas = useRef(null)
+  const photoCanvas = useRef(null)
+  const video = useRef(null)
   const [brush, setBrush] = useState('pencil')
   const [color, setColor] = useState(colors[0])
   const [size, setSize] = useState(10)
@@ -58,6 +64,20 @@ const Painter = () => {
     setPointer(oldPointer => oldPointer + 1)
     setCurrentPath(null)
     setPoints([])
+  }
+
+  const handleStartCamera = (stream) => {
+    video.current.srcObject = stream
+    enableCamera(true)
+  }
+
+  const handleTakeThePhoto = () => {
+    photoCanvas.current.getContext('2d').drawImage(video.current, 0, 0, photoCanvas.current.width, photoCanvas.current.height)
+   	const imageDataUrl = photoCanvas.current.toDataURL('image/jpeg')
+
+   	// data url of the image
+   	console.log(imageDataUrl)
+    enableCamera(false)
   }
 
   const handleUndo = useCallback(() => {
@@ -94,6 +114,24 @@ const Painter = () => {
         <BlopFilter />
       </defs>
     </svg>
+
+    <section className="photo-video" style={{ display: cameraEnabled ? 'block': 'none' }}>
+      <span className="icon-cross" onClick={ () => { enableCamera(false) }} />
+      <video
+        ref={ video }
+        width={ WIDTH }
+        height={ HEIGHT }
+        autoPlay
+      ></video>
+    </section>
+
+    <section className="photo-canvas">
+      <canvas
+        ref={ photoCanvas }
+        width={ WIDTH }
+        height={ HEIGHT }
+      ></canvas>
+    </section>
     <Tools
       color={ color }
       onColor={ setColor }
@@ -103,6 +141,9 @@ const Painter = () => {
       onUndo={ handleUndo }
       onRedo={ handleRedo }
       onDelete={ handleDelete }
+      isCameraEnabled={ cameraEnabled }
+      onStartCamera={ handleStartCamera }
+      onTakeThePhoto={ handleTakeThePhoto }
     />
   </>)
 }
