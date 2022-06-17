@@ -1,5 +1,3 @@
-import { useState, useRef } from 'react'
-
 const WIDTH = 1280
 const HEIGHT = 960
 

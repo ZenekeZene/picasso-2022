@@ -13,15 +13,20 @@ const MobileCamera = () => {
 
       { /* The hidden file `input` for opening the native camera */ }
       <input
+        id="cameraFileInput"
         type="file"
         accept="image/*"
         capture="environment"
         onChange={ handleChange }
+        style={{ display: 'none' }}
       />
     </label>
 
     { /* displays the picture uploaded from the native camera */ }
-    <img id="pictureFromCamera" src={ imageSrc } />
+    <img
+      alt="Selfi photo"
+      src={ imageSrc }
+    />
   </>)
 }
 
