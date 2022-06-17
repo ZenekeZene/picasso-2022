@@ -4,12 +4,11 @@ import options from 'modules/paint/config'
 import Tools from 'modules/paint/tools/Tools'
 import { colors } from 'modules/paint/tools/color/ColorsTool'
 import { getSvgPathFromStroke } from 'modules/paint/render'
+import MobileCamera from 'modules/camera/mobile/MobileCamera'
+import DesktopCamera from 'modules/camera/desktop/DesktopCamera'
 import GlowFilter from '../filters/GlowFilter'
 import BlopFilter from '../filters/BlopFilter'
 import './Painter.scss'
-
-const WIDTH = 1280
-const HEIGHT = 960
 
 function createPath (pointer, size, color, options) {
   const path = document.createElementNS('http://www.w3.org/2000/svg', 'path')
@@ -115,23 +114,15 @@ const Painter = () => {
       </defs>
     </svg>
 
-    <section className="photo-video" style={{ display: cameraEnabled ? 'block': 'none' }}>
-      <span className="icon-cross" onClick={ () => { enableCamera(false) }} />
-      <video
-        ref={ video }
-        width={ WIDTH }
-        height={ HEIGHT }
-        autoPlay
-      ></video>
-    </section>
 
-    <section className="photo-canvas">
-      <canvas
-        ref={ photoCanvas }
-        width={ WIDTH }
-        height={ HEIGHT }
-      ></canvas>
-    </section>
+    <DesktopCamera
+      cameraEnabled={ cameraEnabled }
+      enableCamera={ enableCamera }
+      video={ video }
+      photoCanvas={ photoCanvas }
+    />
+    <MobileCamera />
+
     <Tools
       color={ color }
       onColor={ setColor }
