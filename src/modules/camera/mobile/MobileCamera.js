@@ -26,7 +26,7 @@ const MobileCamera = () => {
       { imageSrc.current && (
         <img
           alt="Espacio disponible para albergar retratos del usuario"
-          src={ imageSrc }
+          src={ imageSrc.current }
           className="mobile-camera__image"
         />
       )}
