@@ -28,6 +28,7 @@ const Painter = () => {
   const canvas = useRef(null)
   const photoCanvas = useRef(null)
   const video = useRef(null)
+  const [imageLoaded, setImageLoaded] = useState(false)
   const [brush, setBrush] = useState('pencil')
   const [color, setColor] = useState(colors[0])
   const [size, setSize] = useState(10)
@@ -65,6 +66,7 @@ const Painter = () => {
   const handleTakeThePhoto = () => {
     photoCanvas.current.getContext('2d').drawImage(video.current, 0, 0, photoCanvas.current.width, photoCanvas.current.height)
    	const imageDataUrl = photoCanvas.current.toDataURL('image/jpeg')
+    setImageLoaded(true)
 
    	// data url of the image
    	console.log(imageDataUrl)
@@ -92,6 +94,11 @@ const Painter = () => {
     Array.from(paths).forEach(path => path.remove())
   }, [])
 
+  const removeDesktopImage = () => {
+    photoCanvas.current.getContext('2d').clearRect(0, 0, photoCanvas.current.width, photoCanvas.current.height)
+    setImageLoaded(false)
+  }
+
   return (<>
     <svg
       className="canvas-svg"
@@ -112,6 +119,7 @@ const Painter = () => {
       video={ video }
       photoCanvas={ photoCanvas }
     />
+    { imageLoaded && <span className="photo-canvas-remove icon-cross" onClick={ removeDesktopImage }></span> }
     <section ref={ imageContainer }></section>
 
     <Tools

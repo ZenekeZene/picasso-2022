@@ -1,9 +1,9 @@
-import { useState, useRef } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import ReactDOM from 'react-dom'
 import Spinner from 'ui/components/spinner/Spinner'
 import './MobileCamera.scss'
 
-const MobileCamera = ({ imageContainer }) => {
+const MobileCamera = ({ imageContainer, isClear }) => {
   const [imageLoaded, setImageLoaded] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
   const imageSrc = useRef(null)
@@ -18,6 +18,12 @@ const MobileCamera = ({ imageContainer }) => {
   const handleLoad = () => {
     setIsLoading(false)
     setImageLoaded(true)
+  }
+
+  const removeMobileImage = () => {
+    imageSrc.current = null
+    setIsLoading(false)
+    setImageLoaded(false)
   }
 
   return (
@@ -35,6 +41,7 @@ const MobileCamera = ({ imageContainer }) => {
         />
       </label>
 
+      { imageLoaded && <span className="mobile-camera__remove icon-cross" onClick={ removeMobileImage }></span> }
       { imageContainer.current && (
         ReactDOM.createPortal(
           <img

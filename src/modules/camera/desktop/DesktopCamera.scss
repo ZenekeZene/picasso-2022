@@ -1,0 +1,34 @@
+.photo-canvas {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  z-index: -1;
+  border: none;
+  transform: translate(-50%, -50%) scaleX(-1);
+}
+
+.photo-video {
+  position: fixed;
+  bottom: 1rem;
+  width: 19rem;
+  height: auto;
+  overflow: hidden;
+  border-radius: 1rem;
+
+  video {
+    width: 100%;
+    height: auto;
+    transform: scaleX(-1);
+  }
+
+  .icon-cross {
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 1;
+    margin: 1rem;
+    font-size: 2rem;
+    background-color: white;
+    border-radius: 50%;
+  }
+}

@@ -35,7 +35,11 @@ const Tools = ({
         <BrushTool
           onBrush={ onBrush }
         />
-        { isMobile() && <MobileCamera imageContainer={ imageContainer } /> }
+        { isMobile() && (
+          <MobileCamera
+            imageContainer={ imageContainer }
+          />
+        )}
         { !isMobile() && (
           <CameraTool
             isEnabled={ isCameraEnabled }
