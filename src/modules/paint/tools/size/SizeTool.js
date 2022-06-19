@@ -15,7 +15,7 @@ const SizeTool = ({ size, color, onSize, setSectionsVisibled, areSectionsVisible
   }
 
   return (
-    <section className="size-tool">
+    <section className={ `size-tool ${!areSectionsVisibled ? '--mini': '' }` }>
       <span className="size-tool__value" onClick={ () => { setSectionsVisibled(true) }}>{ currentSize }</span>
       { areSectionsVisibled && (<>
         <input

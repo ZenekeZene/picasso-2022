@@ -2,10 +2,12 @@
   &-wrapper {
     position: relative;
     z-index: 1;
-    display: flex;
+    display: inline-flex;
     flex-direction: column;
-    font-size: 1.9rem;
+    font-size: 1.3rem;
     pointer-events: none;
+    transition: opacity 150ms ease-in-out;
+    animation: appear 1s;
 
     span {
       pointer-events: auto;
@@ -26,14 +28,22 @@
     height: 48px;
     padding: 0 1rem;
     background-color: rgba(255, 255, 255, 0.5);
-    border-top-right-radius: 0.25rem;
-    border-bottom-right-radius: 0.25rem;
     pointer-events: auto;
     cursor: pointer;
 
-    &:hover,
-    &:active {
-      color: #008f7a;
+    &:first-child {
+      border-top-left-radius: 0.5rem;
+      border-top-right-radius: 0.5rem;
+    }
+
+    &:last-child {
+      border-bottom-left-radius: 0.5rem;
+      border-bottom-right-radius: 0.5rem;
+    }
+
+    &:hover:not(.not-hover),
+    &:active:not(.not-hover) {
+      color: #4992a9;
     }
 
     @media (hover: none) {
@@ -47,6 +57,23 @@
 
 @keyframes touch-hover {
   0% { color: #2c3e50; }
-  50% { color: #008f7a; }
+  50% { color: #4992a9; }
   100% { color: #2c3e50; }
+}
+
+@keyframes appear {
+  0% {
+    opacity: 0;
+    left: -10rem;
+  }
+
+  50% {
+    left: 5%;
+  }
+
+  90% {
+    opacity: 1;
+  }
+
+  100% { left: 0%; }
 }

@@ -19,7 +19,7 @@ const ColorsTool = ({ onColor, setSectionsVisibled, areSectionsVisibled }) => {
   }, [currentColor, onColor])
 
   return (
-    <div className="color-tool">
+    <div className="color-tool not-hover">
       { !areSectionsVisibled && (
         <span className="color-tool__selected"
           style={{ backgroundColor: currentColor }}

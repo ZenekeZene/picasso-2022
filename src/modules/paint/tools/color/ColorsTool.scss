@@ -9,20 +9,37 @@
 .color-tool {
   display: inline;
   pointer-events: auto;
+  $offset: 0.3rem;
 
   &__selected {
     @include circle;
-    margin-left: 0.6rem;
+    margin-left: $offset;
   }
 
   &__swatches {
     display: inline-flex;
     gap: 1rem;
-    margin: 0 0 0 0.6rem;
+    margin: 0 0 0 $offset;
     padding: 0;
   }
 
   li {
+    position: relative;
     @include circle;
+
+    &.--selected {
+      &:before {
+        content: "\e929";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 1rem;
+        height: 1rem;
+        font-family: 'paint';
+        font-size: 1rem;
+        opacity: 0.9;
+        color: black;
+      }
+    }
   }
 }

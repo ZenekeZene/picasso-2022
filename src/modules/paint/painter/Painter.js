@@ -23,6 +23,7 @@ function createPath (pointer, size, color, options) {
 }
 
 const Painter = () => {
+  const [isDrawing, setIsDrawing] = useState(false)
   const [cameraEnabled, enableCamera] = useState(false)
   const imageContainer = useRef(null)
   const canvas = useRef(null)
@@ -46,12 +47,14 @@ const Painter = () => {
   }
 
   const handlePointerMove = (event) => {
+    setIsDrawing(true)
     if (event.buttons !== 1) return
     setPoints([...points, [event.pageX, event.pageY, event.pressure]])
     currentPath?.setAttribute('d', getSvgPathFromStroke(getStroke(points, options[brush])))
   }
 
   const handlePointerUp = () => {
+    setIsDrawing(false)
     setHistory(oldHistory => [...oldHistory, { points, color, size, brush }])
     setPointer(oldPointer => oldPointer + 1)
     setCurrentPath(null)
@@ -99,44 +102,47 @@ const Painter = () => {
     setImageLoaded(false)
   }
 
-  return (<main className="height-100">
-    <svg
-      className="canvas-svg"
-      ref={ canvas }
-      onPointerDown={ handlePointerDown }
-      onPointerMove={ handlePointerMove }
-      onPointerUp={ handlePointerUp }
-    >
-      <defs>
-        <GlowFilter />
-        <BlopFilter />
-      </defs>
-    </svg>
+  return (
+    <main className="height-100">
+      <svg
+        className="canvas-svg"
+        ref={ canvas }
+        onPointerDown={ handlePointerDown }
+        onPointerMove={ handlePointerMove }
+        onPointerUp={ handlePointerUp }
+      >
+        <defs>
+          <GlowFilter />
+          <BlopFilter />
+        </defs>
+      </svg>
 
-    <DesktopCamera
-      cameraEnabled={ cameraEnabled }
-      enableCamera={ enableCamera }
-      video={ video }
-      photoCanvas={ photoCanvas }
-    />
-    { imageLoaded && <span className="photo-canvas-remove icon-cross" onClick={ removeDesktopImage }></span> }
-    <section ref={ imageContainer }></section>
+      <DesktopCamera
+        cameraEnabled={ cameraEnabled }
+        enableCamera={ enableCamera }
+        video={ video }
+        photoCanvas={ photoCanvas }
+      />
+      { imageLoaded && <span className="photo-canvas-remove icon-cross" onClick={ removeDesktopImage }></span> }
+      <section ref={ imageContainer }></section>
 
-    <Tools
-      color={ color }
-      onColor={ setColor }
-      onBrush={ setBrush }
-      size={ size }
-      onSize={ setSize }
-      onUndo={ handleUndo }
-      onRedo={ handleRedo }
-      onDelete={ handleDelete }
-      isCameraEnabled={ cameraEnabled }
-      onStartCamera={ handleStartCamera }
-      onTakeThePhoto={ handleTakeThePhoto }
-      imageContainer={ imageContainer }
-    />
-  </main>)
+      <Tools
+        isDrawing={ isDrawing }
+        color={ color }
+        onColor={ setColor }
+        onBrush={ setBrush }
+        size={ size }
+        onSize={ setSize }
+        onUndo={ handleUndo }
+        onRedo={ handleRedo }
+        onDelete={ handleDelete }
+        isCameraEnabled={ cameraEnabled }
+        onStartCamera={ handleStartCamera }
+        onTakeThePhoto={ handleTakeThePhoto }
+        imageContainer={ imageContainer }
+      />
+    </main>
+  )
 }
 
 

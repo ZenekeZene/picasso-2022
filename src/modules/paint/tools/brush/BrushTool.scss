@@ -6,5 +6,38 @@
     padding: 0;
     list-style: none;
     gap: 1rem;
+
+    &:hover,
+    &:active {
+      color: #2c3e50;
+    }
+
+    li {
+      &:hover,
+      &:active {
+        color: #4992a9;
+      }
+
+      @media (hover: none) {
+        &:hover {
+          color: #2c3e50;
+          animation: touch-hover 500ms;
+        }
+      }
+    }
+  }
+
+  &__selected {
+    &:hover,
+    &:active {
+      color: #4992a9;
+    }
+
+    @media (hover: none) {
+      &:hover {
+        color: #2c3e50;
+        animation: touch-hover 500ms;
+      }
+    }
   }
 }

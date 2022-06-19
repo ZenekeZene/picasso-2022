@@ -18,7 +18,7 @@ const BrushTool = ({ onBrush, setSectionsVisibled, areSectionsVisibled }) => {
   }, [currentBrush, onBrush])
 
   return (
-    <section className="brush-tool">
+    <section className="brush-tool not-hover">
       { !areSectionsVisibled && (
         <span className={ `brush-tool__selected icon-${currentBrush}` }
           onClick={ () => { setSectionsVisibled(true) }}
