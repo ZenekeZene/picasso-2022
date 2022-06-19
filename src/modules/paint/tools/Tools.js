@@ -3,6 +3,8 @@ import CameraTool from 'modules/paint/tools/camera/CameraTool'
 import ColorsTool from 'modules/paint/tools/color/ColorsTool'
 import SizeTool from 'modules/paint/tools/size/SizeTool'
 import BrushTool from 'modules/paint/tools/brush/BrushTool'
+import MobileCamera from 'modules/camera/mobile/MobileCamera'
+
 import './Tools.scss'
 
 const Tools = ({ color, onColor, onBrush, size, isCameraEnabled, onSize, onUndo, onRedo, onDelete, onStartCamera, onTakeThePhoto }) => {
@@ -22,6 +24,7 @@ const Tools = ({ color, onColor, onBrush, size, isCameraEnabled, onSize, onUndo,
         <BrushTool
           onBrush={ onBrush }
         />
+        <MobileCamera />
         <CameraTool
           isEnabled={ isCameraEnabled }
           onStartCamera={ onStartCamera }

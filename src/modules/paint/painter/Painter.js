@@ -4,7 +4,6 @@ import options from 'modules/paint/config'
 import Tools from 'modules/paint/tools/Tools'
 import { colors } from 'modules/paint/tools/color/ColorsTool'
 import { getSvgPathFromStroke } from 'modules/paint/render'
-import MobileCamera from 'modules/camera/mobile/MobileCamera'
 import DesktopCamera from 'modules/camera/desktop/DesktopCamera'
 import GlowFilter from '../filters/GlowFilter'
 import BlopFilter from '../filters/BlopFilter'
@@ -114,14 +113,12 @@ const Painter = () => {
       </defs>
     </svg>
 
-
     <DesktopCamera
       cameraEnabled={ cameraEnabled }
       enableCamera={ enableCamera }
       video={ video }
       photoCanvas={ photoCanvas }
     />
-    <MobileCamera />
 
     <Tools
       color={ color }

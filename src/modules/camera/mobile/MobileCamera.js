@@ -10,10 +10,8 @@ const MobileCamera = () => {
 
   return (
     <section className="mobile-camera">
-      { /* The `label` is attached to the hidden file input */ }
-      <label for="cameraFileInput">
+      <label for="cameraFileInput"><span class="icon-camera"></span>
 
-        { /* The hidden file `input` for opening the native camera */ }
         <input
           id="cameraFileInput"
           type="file"
@@ -24,13 +22,16 @@ const MobileCamera = () => {
         />
       </label>
 
-      { /* displays the picture uploaded from the native camera */ }
-      <img
-        alt="Espacio disponible para albergar retratos del usuario"
-        src={ imageSrc }
-      />
+      { imageSrc && (
+        <img
+          alt="Espacio disponible para albergar retratos del usuario"
+          src={ imageSrc }
+          className="mobile-camera__image"
+        />
+      )}
     </section>
   )
 }
 
 export default MobileCamera
+// The hidden file `input` for opening the native camera.

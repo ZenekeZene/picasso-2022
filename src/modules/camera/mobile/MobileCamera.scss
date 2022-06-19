@@ -1,7 +1,12 @@
 .mobile-camera {
-  position: fixed;
-  top: 0;
-  z-index: 1;
-  width: 5rem;
-  height: 5rem;
+  &__image {
+    position: fixed;
+    top: 0;
+    left: 0;;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+    color: transparent;
+    pointer-events: none;
+  }
 }
