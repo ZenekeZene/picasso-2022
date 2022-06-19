@@ -4,6 +4,7 @@ import ColorsTool from 'modules/paint/tools/color/ColorsTool'
 import SizeTool from 'modules/paint/tools/size/SizeTool'
 import BrushTool from 'modules/paint/tools/brush/BrushTool'
 import MobileCamera from 'modules/camera/mobile/MobileCamera'
+import isMobile from 'adapter/Mobile.Checker'
 
 import './Tools.scss'
 
@@ -13,7 +14,8 @@ const Tools = ({
   size, onSize,
   isCameraEnabled,
   onUndo, onRedo, onDelete,
-  onStartCamera, onTakeThePhoto
+  onStartCamera, onTakeThePhoto,
+  imageContainer,
 }) => {
   const [isToolsVisibled, setIsToolsVisibled] = useState(false)
 
@@ -33,12 +35,14 @@ const Tools = ({
         <BrushTool
           onBrush={ onBrush }
         />
-        <MobileCamera />
-        <CameraTool
-          isEnabled={ isCameraEnabled }
-          onStartCamera={ onStartCamera }
-          onTakeThePhoto={ onTakeThePhoto }
-        />
+        { isMobile() && <MobileCamera imageContainer={ imageContainer } /> }
+        { !isMobile() && (
+          <CameraTool
+            isEnabled={ isCameraEnabled }
+            onStartCamera={ onStartCamera }
+            onTakeThePhoto={ onTakeThePhoto }
+          />
+        )}
         <span className="icon-reply" onClick={ onUndo } />
         <span className="icon-forward" onClick={ onRedo } />
         <span className="icon-trash" onClick={ onDelete } />

@@ -1,8 +1,10 @@
 import { useState, useRef } from 'react'
+import ReactDOM from 'react-dom'
 import Spinner from 'ui/components/spinner/Spinner'
 import './MobileCamera.scss'
 
-const MobileCamera = () => {
+const MobileCamera = ({ imageContainer }) => {
+  const [imageLoaded, setImageLoaded] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
   const imageSrc = useRef(null)
 
@@ -15,6 +17,7 @@ const MobileCamera = () => {
 
   const handleLoad = () => {
     setIsLoading(false)
+    setImageLoaded(true)
   }
 
   return (
@@ -32,13 +35,16 @@ const MobileCamera = () => {
         />
       </label>
 
-      <img
-        alt="Espacio disponible para albergar retratos del usuario"
-        src={ imageSrc.current }
-        className="mobile-camera__image"
-        onLoad={ handleLoad }
-        style={{ opacity: isLoading ? 0 : 1 }}
-      />
+      { imageContainer.current && (
+        ReactDOM.createPortal(
+          <img
+            alt="Espacio disponible para albergar retratos del usuario"
+            src={ imageSrc.current }
+            className="mobile-camera__image"
+            onLoad={ handleLoad }
+            style={{ opacity: imageLoaded ? 1 : 0 }}
+          />, imageContainer.current)
+        )}
 
       { isLoading && <Spinner className="mobile-camera__spinner" />}
 

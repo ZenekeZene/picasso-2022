@@ -15,23 +15,16 @@ function createPath (pointer, size, color, options) {
   path.setAttribute('stroke-width', size)
   path.setAttribute('fill', color)
   path.setAttribute('id', `path-${pointer}`)
-  if (options?.opacity) {
-    path.setAttribute('opacity', options.opacity)
-  }
-  if (options?.glow) {
-    path.classList.add('with-glow')
-  }
-  if (options?.effect) {
-    path.classList.add('with-effect')
-  }
-  if (options?.blop) {
-    path.classList.add('with-blop')
-  }
+
+  if (options?.opacity) { path.setAttribute('opacity', options.opacity) }
+  if (options?.glow) { path.classList.add('with-glow') }
+  if (options?.blop) { path.classList.add('with-blop') }
   return path
 }
 
 const Painter = () => {
   const [cameraEnabled, enableCamera] = useState(false)
+  const imageContainer = useRef(null)
   const canvas = useRef(null)
   const photoCanvas = useRef(null)
   const video = useRef(null)
@@ -119,6 +112,7 @@ const Painter = () => {
       video={ video }
       photoCanvas={ photoCanvas }
     />
+    <section ref={ imageContainer }></section>
 
     <Tools
       color={ color }
@@ -132,6 +126,7 @@ const Painter = () => {
       isCameraEnabled={ cameraEnabled }
       onStartCamera={ handleStartCamera }
       onTakeThePhoto={ handleTakeThePhoto }
+      imageContainer={ imageContainer }
     />
   </>)
 }
