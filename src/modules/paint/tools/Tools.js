@@ -4,7 +4,8 @@ import ColorsTool from 'modules/paint/tools/color/ColorsTool'
 import SizeTool from 'modules/paint/tools/size/SizeTool'
 import BrushTool from 'modules/paint/tools/brush/BrushTool'
 import MobileCamera from 'modules/camera/mobile/MobileCamera'
-import isMobile from 'adapter/Mobile.Checker'
+import ImageTool from 'modules/paint/tools/image/ImageTool'
+import checkIsMobile from 'adapter/Mobile.Checker'
 
 import './Tools.scss'
 
@@ -18,6 +19,7 @@ const Tools = ({
   imageContainer,
 }) => {
   const [isToolsVisibled, setIsToolsVisibled] = useState(false)
+  const isMobile = checkIsMobile()
 
   return (
     <section className="tools-wrapper">
@@ -35,12 +37,9 @@ const Tools = ({
         <BrushTool
           onBrush={ onBrush }
         />
-        { isMobile() && (
-          <MobileCamera
-            imageContainer={ imageContainer }
-          />
-        )}
-        { !isMobile() && (
+        <ImageTool imageContainer={ imageContainer } />
+        { isMobile && (<MobileCamera imageContainer={ imageContainer } /> )}
+        { !isMobile && (
           <CameraTool
             isEnabled={ isCameraEnabled }
             onStartCamera={ onStartCamera }
