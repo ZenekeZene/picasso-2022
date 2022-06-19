@@ -7,14 +7,23 @@ import MobileCamera from 'modules/camera/mobile/MobileCamera'
 
 import './Tools.scss'
 
-const Tools = ({ color, onColor, onBrush, size, isCameraEnabled, onSize, onUndo, onRedo, onDelete, onStartCamera, onTakeThePhoto }) => {
+const Tools = ({
+  color, onColor,
+  onBrush,
+  size, onSize,
+  isCameraEnabled,
+  onUndo, onRedo, onDelete,
+  onStartCamera, onTakeThePhoto
+}) => {
   const [isToolsVisibled, setIsToolsVisibled] = useState(false)
+
   return (
-    <section className="tools">
+    <section className="tools-wrapper">
       <span className={ isToolsVisibled ? 'icon-cross' : 'icon-pencil2' }
         onClick={ () => setIsToolsVisibled(!isToolsVisibled) }
       ></span>
-      { isToolsVisibled && (<>
+
+      <article className="tools" style={{ opacity: isToolsVisibled ? 1 : 0 }}>
         <ColorsTool onColor={ onColor } />
         <SizeTool
           size={ size }
@@ -33,8 +42,8 @@ const Tools = ({ color, onColor, onBrush, size, isCameraEnabled, onSize, onUndo,
         <span className="icon-reply" onClick={ onUndo } />
         <span className="icon-forward" onClick={ onRedo } />
         <span className="icon-trash" onClick={ onDelete } />
-      </>
-      )}
+      </article>
+
     </section>
   )
 }

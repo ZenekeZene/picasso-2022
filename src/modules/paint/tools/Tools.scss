@@ -1,12 +1,17 @@
 .tools {
-  position: relative;
-  z-index: 1;
+  &-wrapper {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    font-size: 1.9rem;
+  }
+
   display: inline-flex;
   flex-direction: column;
   align-items: flex-start;
   gap: 0;
   padding-left: 0;
-  font-size: 1.9rem;
   pointer-events: none;
 
   & > * {
