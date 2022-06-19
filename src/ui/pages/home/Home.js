@@ -4,7 +4,7 @@ export const path = '/'
 
 const Home = () => {
   return (
-    <article>
+    <article className='height-100'>
       <Painter />
     </article>
   )

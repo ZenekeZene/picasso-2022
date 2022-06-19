@@ -1,7 +1,10 @@
 .brush-tool {
-  display: inline-flex;
-  margin: 0;
-  padding: 0;
-  list-style: none;
-  gap: 1rem;
+
+  &__list {
+    display: inline-flex;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    gap: 1rem;
+  }
 }

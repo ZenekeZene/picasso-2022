@@ -4,6 +4,7 @@ html,
 body {
   font-family: 'Open Sans', sans-serif;
   color: #2c3e50;
+  height: 100%;
 }
 
 button,
@@ -26,4 +27,8 @@ input {
   font-family: 'Fredoka One', sans-serif;
 }
 
-@import './range.scss'
+@import './range.scss';
+
+.height-100 {
+  height: 100%;
+}

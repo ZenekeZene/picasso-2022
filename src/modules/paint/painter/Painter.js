@@ -99,7 +99,7 @@ const Painter = () => {
     setImageLoaded(false)
   }
 
-  return (<>
+  return (<main className="height-100">
     <svg
       className="canvas-svg"
       ref={ canvas }
@@ -136,7 +136,7 @@ const Painter = () => {
       onTakeThePhoto={ handleTakeThePhoto }
       imageContainer={ imageContainer }
     />
-  </>)
+  </main>)
 }
 
 

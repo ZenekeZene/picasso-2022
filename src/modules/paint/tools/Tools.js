@@ -18,24 +18,30 @@ const Tools = ({
   onStartCamera, onTakeThePhoto,
   imageContainer,
 }) => {
-  const [isToolsVisibled, setIsToolsVisibled] = useState(false)
+  const [areSectionsVisibled, setSectionsVisibled] = useState(false)
   const isMobile = checkIsMobile()
 
   return (
     <section className="tools-wrapper">
-      <span className={ isToolsVisibled ? 'icon-cross' : 'icon-pencil2' }
-        onClick={ () => setIsToolsVisibled(!isToolsVisibled) }
-      ></span>
+      <article className="tools">
 
-      <article className="tools" style={{ opacity: isToolsVisibled ? 1 : 0 }}>
-        <ColorsTool onColor={ onColor } />
+        <ColorsTool
+          onColor={ onColor }
+          setSectionsVisibled={ setSectionsVisibled }
+          areSectionsVisibled={ areSectionsVisibled }
+        />
+
         <SizeTool
           size={ size }
           color={ color }
           onSize={ onSize }
+          setSectionsVisibled={ setSectionsVisibled }
+          areSectionsVisibled={ areSectionsVisibled }
         />
         <BrushTool
           onBrush={ onBrush }
+          setSectionsVisibled={ setSectionsVisibled }
+          areSectionsVisibled={ areSectionsVisibled }
         />
         <ImageTool imageContainer={ imageContainer } />
         { isMobile && (<MobileCamera imageContainer={ imageContainer } /> )}

@@ -10,7 +10,7 @@ const brushes = [
   '✨'
 ]
 
-const BrushTool = ({ onBrush }) => {
+const BrushTool = ({ onBrush, setSectionsVisibled, areSectionsVisibled }) => {
   const [currentBrush, setCurrentBrush] = useState(brushes[0])
 
   useEffect(() => {
@@ -18,21 +18,26 @@ const BrushTool = ({ onBrush }) => {
   }, [currentBrush, onBrush])
 
   return (
-    <ul className="brush-tool">
-      { brushes.slice(0, 4).map((brush, index) =>
-        <li
-          key={ `brush-${index}` }
-          className={ `icon-${brush}` }
-          onClick={ () => { setCurrentBrush(brush) }}
-        />
+    <section className="brush-tool">
+      { !areSectionsVisibled && (
+        <span className={ `brush-tool__selected icon-${currentBrush}` }
+          onClick={ () => { setSectionsVisibled(true) }}
+        ></span>
       )}
-      { brushes.slice(4, 7).map((brush, index) =>
-        <li
-          key={ `brush-${index}` }
-          onClick={ () => { setCurrentBrush(brush) }}
-        >{ brush }</li>
+      { areSectionsVisibled && (<ul className="brush-tool__list">
+        { brushes.slice(0, 4).map((brush, index) =>
+          <li
+            key={ `brush-${index}` }
+            className={ `icon-${brush}` }
+            onClick={ () => {
+              setCurrentBrush(brush)
+              setSectionsVisibled(false)
+            }}
+          />
+        )}
+        </ul>
       )}
-    </ul>
+    </section>
   )
 }
 
