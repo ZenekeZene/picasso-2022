@@ -4,13 +4,14 @@ import './MobileCamera.scss'
 const MobileCamera = () => {
   const imageSrc = useRef(null)
 
-  const handleChange = () => {
-    imageSrc.current = window.URL.createObjectURL(this.files[0])
+  const handleChange = (event) => {
+    imageSrc.current = window.URL.createObjectURL(event.target.files[0])
   }
 
   return (
     <section className="mobile-camera">
-      <label for="cameraFileInput"><span class="icon-camera"></span>
+      <label htmlFor="cameraFileInput">
+        <span className="icon-camera"></span>
 
         <input
           id="cameraFileInput"
@@ -22,7 +23,7 @@ const MobileCamera = () => {
         />
       </label>
 
-      { imageSrc && (
+      { imageSrc.current && (
         <img
           alt="Espacio disponible para albergar retratos del usuario"
           src={ imageSrc }
