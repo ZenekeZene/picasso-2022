@@ -47,10 +47,10 @@ const Painter = () => {
   }
 
   const handlePointerMove = (event) => {
-    setIsDrawing(true)
     if (event.buttons !== 1) return
     setPoints([...points, [event.pageX, event.pageY, event.pressure]])
     currentPath?.setAttribute('d', getSvgPathFromStroke(getStroke(points, options[brush])))
+    setIsDrawing(true)
   }
 
   const handlePointerUp = () => {
@@ -68,11 +68,8 @@ const Painter = () => {
 
   const handleTakeThePhoto = () => {
     photoCanvas.current.getContext('2d').drawImage(video.current, 0, 0, photoCanvas.current.width, photoCanvas.current.height)
-   	const imageDataUrl = photoCanvas.current.toDataURL('image/jpeg')
+   	photoCanvas.current.toDataURL('image/jpeg')
     setImageLoaded(true)
-
-   	// data url of the image
-   	console.log(imageDataUrl)
     enableCamera(false)
   }
 

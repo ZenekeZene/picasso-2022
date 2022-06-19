@@ -30,7 +30,7 @@ const Tools = ({
   })
 
   return (
-    <section className="tools-wrapper" ref={ ref } style={{ opacity: isDrawing? 0.2: 1 }}>
+    <section className="tools-wrapper" ref={ ref } style={{ opacity: isDrawing ? 0.2 : 1 }}>
       <article className="tools">
 
         <ColorsTool
