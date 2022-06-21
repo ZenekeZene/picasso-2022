@@ -72,6 +72,8 @@ const Painter = () => {
         video={ video }
         photoCanvas={ photoCanvas }
       />
+
+      { /* Imported image */ }
       { imageLoaded && <span className="photo-canvas-remove icon-cross" onClick={ removeDesktopImage }></span> }
       <section ref={ imageContainer }></section>
 
