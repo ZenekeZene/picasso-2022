@@ -1,4 +1,4 @@
-export const colors = [
+export const colorsPrimary = [
   '#008f7a',
   '#845ec2',
   '#d65db1',
@@ -28,4 +28,7 @@ const colorsTerciary = [
   '#191a1a'
 ]
 
-export default [colors, colorsSecondary, colorsTerciary]
+const colors = [colorsPrimary, colorsSecondary, colorsTerciary]
+
+export default colors
+
