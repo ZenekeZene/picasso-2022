@@ -5,7 +5,8 @@ import colors from './colors'
 import './ColorsTool.scss'
 import ColorsSwiper from './ColorsSwiper'
 
-const ColorsTool = ({ onColor, setSectionsVisibled, areSectionsVisibled }) => {
+const ColorsTool = ({ onColor, sectionsState }) => {
+  const [areSectionsVisibled, setSectionsVisibled] = sectionsState
   const [currentColor, setCurrentColor] = useState(colors[0][0])
 
   useEffect(() => {

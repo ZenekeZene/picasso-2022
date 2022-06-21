@@ -5,6 +5,7 @@ import SizeTool from 'modules/paint/tools/size/SizeTool'
 import BrushTool from 'modules/paint/tools/brush/BrushTool'
 import MobileCamera from 'modules/camera/mobile/MobileCamera'
 import ImageTool from 'modules/paint/tools/image/ImageTool'
+import HistoryTools from 'modules/paint/tools/history/HistoryTools'
 import checkIsMobile from 'adapter/Mobile.Checker'
 import useOnClickOutside from 'hooks/useOnClickOutside'
 
@@ -21,7 +22,8 @@ const Tools = ({
   imageContainer,
 }) => {
   const ref = useRef(null)
-  const [areSectionsVisibled, setSectionsVisibled] = useState(false)
+  const sectionsState = useState(false)
+  const [areSectionsVisibled, setSectionsVisibled] = sectionsState
   const isMobile = checkIsMobile()
 
   useOnClickOutside(ref, () => {
@@ -30,26 +32,26 @@ const Tools = ({
   })
 
   return (
-    <section className="tools-wrapper" ref={ ref } style={{ opacity: isDrawing ? 0.2 : 1 }}>
+    <section className="tools-wrapper"
+      ref={ ref }
+      style={{ opacity: isDrawing ? 0.2 : 1 }}
+    >
       <article className="tools">
 
         <ColorsTool
           onColor={ onColor }
-          setSectionsVisibled={ setSectionsVisibled }
-          areSectionsVisibled={ areSectionsVisibled }
+          sectionsState={ sectionsState }
         />
 
         <SizeTool
           size={ size }
           color={ color }
           onSize={ onSize }
-          setSectionsVisibled={ setSectionsVisibled }
-          areSectionsVisibled={ areSectionsVisibled }
+          sectionsState={ sectionsState }
         />
         <BrushTool
           onBrush={ onBrush }
-          setSectionsVisibled={ setSectionsVisibled }
-          areSectionsVisibled={ areSectionsVisibled }
+          sectionsState={ sectionsState }
         />
         <ImageTool imageContainer={ imageContainer } />
         { isMobile && (<MobileCamera imageContainer={ imageContainer } /> )}
@@ -63,26 +65,13 @@ const Tools = ({
             onTakeThePhoto={ onTakeThePhoto }
           />
         )}
-        <span className="icon-reply"
-          onClick={ () => {
-            setSectionsVisibled(false)
-            onUndo()
-          }}
-        />
-        <span className="icon-forward"
-          onClick={ () => {
-            setSectionsVisibled(false)
-            onRedo()
-          }}
-        />
-        <span className="icon-trash"
-          onClick={ () => {
-            setSectionsVisibled(false)
-            onDelete()
-          }}
+        <HistoryTools
+          onUndo={ onUndo }
+          onRedo={ onRedo }
+          onDelete={ onDelete }
+          setSectionsVisibled={ setSectionsVisibled }
         />
       </article>
-
     </section>
   )
 }

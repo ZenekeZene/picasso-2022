@@ -10,7 +10,8 @@ const brushes = [
   '✨'
 ]
 
-const BrushTool = ({ onBrush, setSectionsVisibled, areSectionsVisibled }) => {
+const BrushTool = ({ onBrush, sectionsState }) => {
+  const [areSectionsVisibled, setSectionsVisibled] = sectionsState
   const [currentBrush, setCurrentBrush] = useState(brushes[0])
 
   useEffect(() => {

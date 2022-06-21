@@ -1,6 +1,6 @@
 // Turn the points returned from perfect-freehand into SVG path data.
 
-export function getSvgPathFromStroke(stroke) {
+export function getSvgPathFromStroke (stroke) {
   if (!stroke.length) return ""
 
   const d = stroke.reduce(

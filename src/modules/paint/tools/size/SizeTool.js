@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react'
 import './SizeTool.scss'
 
-const SizeTool = ({ size, color, onSize, setSectionsVisibled, areSectionsVisibled }) => {
+const SizeTool = ({ size, color, onSize, sectionsState }) => {
+  const [areSectionsVisibled, setSectionsVisibled] = sectionsState
   const [currentSize, setCurrentSize] = useState(size)
 
   useEffect(() => {
