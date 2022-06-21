@@ -3,29 +3,32 @@ import { getStroke } from 'perfect-freehand'
 import { getSvgPathFromStroke } from 'modules/paint/render'
 import createPath from 'modules/paint/render/createPath'
 
-const usePaint = ({ canvas, pointer, config, options, registerPath }) => {
+const usePaint = ({ canvas, pointer, config, options, registerPath, adjustHistory }) => {
   const [isDrawing, setIsDrawing] = useState(false)
   const [currentPath, setCurrentPath] = useState(null)
   const [points, setPoints] = useState([])
   const { size, color, brush } = config
 
   const onPointerDown = (event) => {
+    if (!event.isPrimary) return
+    adjustHistory()
     const path = createPath(pointer, size, color, options[brush])
+    setPoints([[event.pageX, event.pageY, event.pressure]])
     setCurrentPath(path)
     event.target.setPointerCapture(event.pointerId)
-    setPoints([[event.pageX, event.pageY, event.pressure]])
-    canvas.current.appendChild(path)
   }
 
   const onPointerMove = (event) => {
     if (event.buttons !== 1) return
     setPoints([...points, [event.pageX, event.pageY, event.pressure]])
     currentPath?.setAttribute('d', getSvgPathFromStroke(getStroke(points, options[brush])))
+    canvas.current.appendChild(currentPath)
     setIsDrawing(true)
   }
 
-  const onPointerUp = () => {
+  const onPointerUp = (event) => {
     setIsDrawing(false)
+    if (!event.isPrimary) return
     registerPath(points, config)
     setCurrentPath(null)
     setPoints([])

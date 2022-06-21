@@ -25,7 +25,8 @@ const Painter = () => {
   const {
     handlers: historyHandlers,
     pointer,
-    registerPath
+    registerPath,
+    adjustHistory
   } = useHistory({ canvas, options: brushesConfig })
 
   const {
@@ -36,7 +37,8 @@ const Painter = () => {
     pointer,
     config,
     options: brushesConfig,
-    registerPath
+    registerPath,
+    adjustHistory
   })
 
   const handleStartCamera = (stream) => {
@@ -58,6 +60,7 @@ const Painter = () => {
 
   return (
     <main className="height-100">
+
       <svg
         className="canvas-svg"
         ref={ canvas }
