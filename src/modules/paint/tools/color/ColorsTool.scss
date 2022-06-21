@@ -8,6 +8,7 @@
 
 .color-tool {
   display: inline;
+  max-width: 16rem;
   pointer-events: auto;
   $offset: 0.3rem;
 
@@ -18,16 +19,23 @@
 
   &__swatches {
     display: inline-flex;
-    gap: 1rem;
+    // gap: 1rem;
+    list-style: none;
     margin: 0 0 0 $offset;
     padding: 0;
   }
 
   li {
     position: relative;
-    @include circle;
+    padding: 0 0.5rem;
 
-    &.--selected {
+
+    span {
+      position: relative;
+      @include circle;
+    }
+
+    &.--selected span {
       &:before {
         content: "\e929";
         position: absolute;
@@ -42,4 +50,21 @@
       }
     }
   }
+
+  .--invisible {
+    display: none;
+  }
+
+  .swiper {
+    position: relative;
+    top: 0.5rem;
+    left: -0.5rem;
+    height: 100%;
+  }
+
+  .swiper-pagination {
+    pointer-events: none;
+    bottom: -2px !important;
+  }
 }
+
