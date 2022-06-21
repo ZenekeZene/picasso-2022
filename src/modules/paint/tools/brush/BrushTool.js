@@ -1,18 +1,10 @@
 import { useState, useEffect } from 'react'
+import { BRUSHES, BRUSHES_ITERABLES } from 'modules/paint/brushes'
 import './BrushTool.scss'
-
-const brushes = [
-  'pencil',
-  'pen',
-  'quill',
-  'paint-format',
-  '🍬',
-  '✨'
-]
 
 const BrushTool = ({ onBrush, sectionsState }) => {
   const [areSectionsVisibled, setSectionsVisibled] = sectionsState
-  const [currentBrush, setCurrentBrush] = useState(brushes[0])
+  const [currentBrush, setCurrentBrush] = useState(BRUSHES.PENCIL)
 
   useEffect(() => {
     onBrush(currentBrush)
@@ -26,7 +18,7 @@ const BrushTool = ({ onBrush, sectionsState }) => {
         ></span>
       )}
       { areSectionsVisibled && (<ul className="brush-tool__list">
-        { brushes.slice(0, 4).map((brush, index) =>
+        { BRUSHES_ITERABLES.slice(0, 4).map((brush, index) =>
           <li
             key={ `brush-${index}` }
             className={ `icon-${brush}` }

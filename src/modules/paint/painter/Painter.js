@@ -1,7 +1,6 @@
 import { useRef, useState } from 'react'
 import brushesConfig from 'modules/paint/brushes'
 import Tools from 'modules/paint/tools/Tools'
-import colors from 'modules/paint/tools/color/ColorsTool'
 import DesktopCamera from 'modules/camera/desktop/DesktopCamera'
 import Filters from 'modules/paint/filters'
 import usePaint from './usePaint'
@@ -17,8 +16,8 @@ const Painter = () => {
   const [imageLoaded, setImageLoaded] = useState(false)
   const [cameraEnabled, enableCamera] = useState(false)
 
-  const [brush, setBrush] = useState('pencil')
-  const [color, setColor] = useState(colors[0])
+  const [brush, setBrush] = useState(null)
+  const [color, setColor] = useState(null)
   const [size, setSize] = useState(10)
 
   const config = { size, color, brush }
