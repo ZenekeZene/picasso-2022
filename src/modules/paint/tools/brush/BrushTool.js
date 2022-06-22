@@ -2,10 +2,7 @@ import { useState, useEffect } from 'react'
 import { BRUSHES, BRUSHES_ITERABLES } from 'modules/paint/brushes'
 import './BrushTool.scss'
 
-const BrushTool = ({
-  setBrush,
-  sectionsState: [areSectionsVisibled, setSectionsVisibled]
-}) => {
+const BrushTool = ({ setBrush, areSectionsVisibled, setSectionsVisibled }) => {
   const [currentBrush, setCurrentBrush] = useState(BRUSHES.PENCIL)
 
   useEffect(() => {
@@ -17,6 +14,7 @@ const BrushTool = ({
       { !areSectionsVisibled && (
         <span className={ `brush-tool__selected icon-${currentBrush}` }
           onClick={ () => { setSectionsVisibled(true) }}
+          data-testid="currentBrush"
         ></span>
       )}
       { areSectionsVisibled && (<ul className="brush-tool__list">

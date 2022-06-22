@@ -40,7 +40,8 @@ const Tools = forwardRef(({
 
         <BrushTool
           setBrush={ setBrush }
-          sectionsState={ sectionsState }
+          areSectionsVisibled={ sectionsState[0] }
+          setSectionsVisibled={ sectionsState[1] }
         />
 
         { children }
