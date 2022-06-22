@@ -2,13 +2,15 @@ import { useState, useEffect } from 'react'
 import { BRUSHES, BRUSHES_ITERABLES } from 'modules/paint/brushes'
 import './BrushTool.scss'
 
-const BrushTool = ({ onBrush, sectionsState }) => {
-  const [areSectionsVisibled, setSectionsVisibled] = sectionsState
+const BrushTool = ({
+  setBrush,
+  sectionsState: [areSectionsVisibled, setSectionsVisibled]
+}) => {
   const [currentBrush, setCurrentBrush] = useState(BRUSHES.PENCIL)
 
   useEffect(() => {
-    onBrush(currentBrush)
-  }, [currentBrush, onBrush])
+    setBrush(currentBrush)
+  }, [currentBrush, setBrush])
 
   return (
     <section className="brush-tool not-hover">

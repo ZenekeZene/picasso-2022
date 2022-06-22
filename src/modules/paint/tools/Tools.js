@@ -1,9 +1,8 @@
 import { useState, forwardRef } from 'react'
-import ColorsTool from 'modules/paint/tools/color/ColorsTool'
+import ColorsTool from 'modules/paint/tools/color/tool/ColorsTool'
 import SizeTool from 'modules/paint/tools/size/SizeTool'
 import BrushTool from 'modules/paint/tools/brush/BrushTool'
 import MobileCamera from 'modules/camera/mobile/MobileCamera'
-import HistoryTools from 'modules/paint/tools/history/HistoryTools'
 import checkIsMobile from 'adapter/Mobile.Checker'
 import useOnClickOutside from 'hooks/useOnClickOutside'
 
@@ -11,10 +10,9 @@ import './Tools.scss'
 
 const Tools = forwardRef(({
   isDrawing,
-  color, onColor,
-  onBrush,
-  size, onSize,
-  onUndo, onRedo, onDelete,
+  sizeState,
+  colorState: [color, setColor],
+  brushState: [, setBrush],
   imageContainer,
 }, ref) => {
   const sectionsState = useState(false)
@@ -27,36 +25,31 @@ const Tools = forwardRef(({
   })
 
   return (
-    <section className="tools-wrapper"
+    <article className="tools-wrapper"
       style={{ opacity: isDrawing ? 0.2 : 1 }}
     >
-      <article className="tools" ref={ ref }>
+      <section className="tools" ref={ ref }>
 
         <ColorsTool
-          onColor={ onColor }
+          setColor={ setColor }
           sectionsState={ sectionsState }
         />
 
         <SizeTool
-          size={ size }
           color={ color }
-          onSize={ onSize }
+          sizeState={ sizeState }
           sectionsState={ sectionsState }
         />
+
         <BrushTool
-          onBrush={ onBrush }
+          setBrush={ setBrush }
           sectionsState={ sectionsState }
         />
 
         { isMobile && (<MobileCamera imageContainer={ imageContainer } /> )}
-        <HistoryTools
-          onUndo={ onUndo }
-          onRedo={ onRedo }
-          onDelete={ onDelete }
-          setSectionsVisibled={ setSectionsVisibled }
-        />
-      </article>
-    </section>
+
+      </section>
+    </article>
   )
 })
 

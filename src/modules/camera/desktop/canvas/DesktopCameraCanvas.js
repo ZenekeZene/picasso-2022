@@ -1,6 +1,6 @@
 import { useState, useRef } from 'react'
 import ReactDOM from 'react-dom'
-import DesktopCameraTool from './DesktopCameraTool'
+import DesktopCameraTool from '../tool/DesktopCameraTool'
 import './DesktopCameraCanvas.scss'
 
 const WIDTH = 1280

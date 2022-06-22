@@ -1,38 +1,39 @@
 import { useRef, useState } from 'react'
 import brushesConfig from 'modules/paint/brushes'
 import Tools from 'modules/paint/tools/Tools'
-import DesktopCameraCanvas from 'modules/camera/desktop/DesktopCameraCanvas'
+import DesktopCameraCanvas from 'modules/camera/desktop/canvas/DesktopCameraCanvas'
 import ImageCanvas from 'modules/image/ImageCanvas'
 import Filters from 'modules/paint/filters'
+import useHistory from 'modules/history/useHistory'
+import HistoryTools from 'modules/history/HistoryTools'
 import usePaint from './usePaint'
-import useHistory from './useHistory'
 import './Painter.scss'
 
 const Painter = () => {
+  const canvasRef = useRef(null)
   const toolsRef = useRef(null)
-  const canvas = useRef(null)
 
-  const [brush, setBrush] = useState(null)
-  const [color, setColor] = useState(null)
-  const [size, setSize] = useState(10)
+  const brushState = useState(null)
+  const colorState = useState(null)
+  const sizeState = useState(10)
 
-  const config = { size, color, brush }
+  const paintState = { sizeState, colorState, brushState }
 
   const {
     handlers: historyHandlers,
     pointer,
     registerPath,
     adjustHistory
-  } = useHistory({ canvas, options: brushesConfig })
+  } = useHistory({ canvasRef, options: brushesConfig })
 
   const {
     handlers: paintHandlers,
     isDrawing,
   } = usePaint({
-    canvas,
+    canvasRef,
     pointer,
-    config,
-    options: brushesConfig,
+    paintState,
+    brushesConfig,
     registerPath,
     adjustHistory
   })
@@ -42,7 +43,7 @@ const Painter = () => {
 
       <svg
         className="canvas-svg"
-        ref={ canvas }
+        ref={ canvasRef }
         { ...paintHandlers }
       >
         <Filters />
@@ -51,15 +52,15 @@ const Painter = () => {
       <Tools
         ref={ toolsRef }
         isDrawing={ isDrawing }
-        { ...config }
-        onColor={ setColor }
-        onBrush={ setBrush }
-        onSize={ setSize }
+        { ...paintState }
         { ...historyHandlers }
       />
 
       <DesktopCameraCanvas toolsRef={ toolsRef } />
       <ImageCanvas toolsRef={ toolsRef } />
+      <HistoryTools toolsRef={ toolsRef }
+        { ...historyHandlers }
+      />
 
     </main>
   )

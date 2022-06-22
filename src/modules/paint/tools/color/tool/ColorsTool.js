@@ -1,17 +1,18 @@
 import { useEffect, useState } from 'react'
-import ColorsSlide from './ColorsSlide'
-import colors from './colors'
-
+import ColorsSlide from '../swiper/ColorsSlide'
+import ColorsSwiper from '../swiper/ColorsSwiper'
+import colors from '../colors'
 import './ColorsTool.scss'
-import ColorsSwiper from './ColorsSwiper'
 
-const ColorsTool = ({ onColor, sectionsState }) => {
-  const [areSectionsVisibled, setSectionsVisibled] = sectionsState
+const ColorsTool = ({
+  setColor,
+  sectionsState: [areSectionsVisibled, setSectionsVisibled]
+}) => {
   const [currentColor, setCurrentColor] = useState(colors[0][0])
 
   useEffect(() => {
-    onColor(currentColor)
-  }, [currentColor, onColor])
+    setColor(currentColor)
+  }, [currentColor, setColor])
 
   const items = colors.map((color) => (
     <ColorsSlide

@@ -9,7 +9,7 @@ import useEventListener from 'hooks/useEventListener'
 const UNDO_SHORCUT = 'cmd+z'
 const REDO_SHORCUT = 'cmd+shift+z'
 
-const useHistory = ({ canvas, options }) => {
+const useHistory = ({ canvasRef, options }) => {
   const [pointer, setPointer] = useState(0)
   const [history, setHistory] = useState([])
 
@@ -21,31 +21,31 @@ const useHistory = ({ canvas, options }) => {
     if (touchesLength === 3) { onRedo() }
   })
 
-  useObserverDOM(canvas, () => {
-    const pathsLength = canvas.current.childNodes.length - 1
+  useObserverDOM(canvasRef, () => {
+    const pathsLength = canvasRef.current.childNodes.length - 1
     setPointer(pathsLength)
   })
 
   const onUndo = useCallback(() => {
     if (pointer === 0) return
-    const path = canvas.current.lastChild
+    const path = canvasRef.current.lastChild
     path?.remove()
-  }, [pointer, canvas])
+  }, [pointer, canvasRef])
 
   const onRedo = useCallback(() => {
     const config = history[pointer]
     if (!config) return
     const path = createPath(pointer, config.size, config.color, options[config.brush])
     path.setAttribute('d', getSvgPathFromStroke(getStroke(config.points, options[config.brush])))
-    canvas.current.appendChild(path)
-  }, [canvas, options, history, pointer])
+    canvasRef.current.appendChild(path)
+  }, [canvasRef, options, history, pointer])
 
   const onDelete = useCallback(() => {
-    const paths = canvas.current.getElementsByTagName('path')
+    const paths = canvasRef.current.getElementsByTagName('path')
     Array.from(paths).forEach(path => path.remove())
     setPointer(0)
     setHistory([])
-  }, [canvas])
+  }, [canvasRef])
 
   const adjustHistory = () => {
     if (history.length < pointer) return
