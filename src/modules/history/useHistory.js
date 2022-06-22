@@ -9,7 +9,7 @@ import useEventListener from 'hooks/useEventListener'
 const UNDO_SHORCUT = 'cmd+z'
 const REDO_SHORCUT = 'cmd+shift+z'
 
-const useHistory = ({ canvasRef, options }) => {
+const useHistory = ({ canvasRef, brushesConfig }) => {
   const [pointer, setPointer] = useState(0)
   const [history, setHistory] = useState([])
 
@@ -35,10 +35,10 @@ const useHistory = ({ canvasRef, options }) => {
   const onRedo = useCallback(() => {
     const config = history[pointer]
     if (!config) return
-    const path = createPath(pointer, config.size, config.color, options[config.brush])
-    path.setAttribute('d', getSvgPathFromStroke(getStroke(config.points, options[config.brush])))
+    const path = createPath(pointer, config.size, config.color, brushesConfig[config.brush])
+    path.setAttribute('d', getSvgPathFromStroke(getStroke(config.points, brushesConfig[config.brush])))
     canvasRef.current.appendChild(path)
-  }, [canvasRef, options, history, pointer])
+  }, [canvasRef, brushesConfig, history, pointer])
 
   const onDelete = useCallback(() => {
     const paths = canvasRef.current.getElementsByTagName('path')

@@ -1,22 +1,15 @@
-.mobile-camera {
+@use 'ui/assets/styles/utils/mixins.scss';
+
+.image-viewer {
+
   &__image {
-    position: absolute;
-    top: 50%;
-    left: 50%;
+    @include mixins.full-center;
     z-index: -2;
     width: 100%;
     height: auto;
     max-width: 57rem;
     color: transparent;
     pointer-events: none;
-    transform: translate(-50%, -50%);
-  }
-
-  &__spinner {
-    position: fixed;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    top: 50%;
   }
 
   &__remove {
@@ -30,5 +23,10 @@
     border-radius: 50%;
     pointer-events: auto;
     cursor: pointer;
+  }
+
+  &__spinner {
+    @include mixins.full-center;
+    z-index: 1;
   }
 }

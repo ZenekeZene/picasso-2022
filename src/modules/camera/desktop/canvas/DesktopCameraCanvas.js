@@ -1,12 +1,11 @@
 import { useState, useRef } from 'react'
-import ReactDOM from 'react-dom'
 import DesktopCameraTool from '../tool/DesktopCameraTool'
 import './DesktopCameraCanvas.scss'
 
 const WIDTH = 1280
 const HEIGHT = 960
 
-const DesktopCameraCanvas = ({ toolsRef }) => {
+const DesktopCameraCanvas = () => {
   const imageContainerRef = useRef(null)
   const videoRef = useRef(null)
   const [imageLoaded, setImageLoaded] = useState(false)
@@ -26,29 +25,25 @@ const DesktopCameraCanvas = ({ toolsRef }) => {
         height={ HEIGHT }
         autoPlay
       ></video>
-    </section>
-
-    <section className="photo-canvas">
-      <canvas
-        ref={ imageContainerRef }
-        width={ WIDTH }
-        height={ HEIGHT }
-      ></canvas>
+      <section className="photo-canvas">
+        <canvas
+          ref={ imageContainerRef }
+          width={ WIDTH }
+          height={ HEIGHT }
+        ></canvas>
+      </section>
     </section>
 
     { /* Imported image */ }
     { imageLoaded && <span className="photo-canvas-remove icon-cross" onClick={ removeDesktopImage }></span> }
 
-    { toolsRef.current && ReactDOM.createPortal(
-        <DesktopCameraTool
-          imageContainerRef={ imageContainerRef }
-          videoRef={ videoRef }
-          isEnabled={ cameraEnabled }
-          enableCamera={ enableCamera }
-          setImageLoaded={ setImageLoaded }
-        />,
-        toolsRef.current
-    )}
+    <DesktopCameraTool
+      imageContainerRef={ imageContainerRef }
+      videoRef={ videoRef }
+      isEnabled={ cameraEnabled }
+      enableCamera={ enableCamera }
+      setImageLoaded={ setImageLoaded }
+    />
   </>)
 }
 

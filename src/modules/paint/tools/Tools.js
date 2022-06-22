@@ -2,8 +2,6 @@ import { useState, forwardRef } from 'react'
 import ColorsTool from 'modules/paint/tools/color/tool/ColorsTool'
 import SizeTool from 'modules/paint/tools/size/SizeTool'
 import BrushTool from 'modules/paint/tools/brush/BrushTool'
-import MobileCamera from 'modules/camera/mobile/MobileCamera'
-import checkIsMobile from 'adapter/Mobile.Checker'
 import useOnClickOutside from 'hooks/useOnClickOutside'
 
 import './Tools.scss'
@@ -13,11 +11,10 @@ const Tools = forwardRef(({
   sizeState,
   colorState: [color, setColor],
   brushState: [, setBrush],
-  imageContainer,
+  children,
 }, ref) => {
   const sectionsState = useState(false)
   const [areSectionsVisibled, setSectionsVisibled] = sectionsState
-  const isMobile = checkIsMobile()
 
   useOnClickOutside(ref, () => {
     if (!areSectionsVisibled) return
@@ -46,7 +43,7 @@ const Tools = forwardRef(({
           sectionsState={ sectionsState }
         />
 
-        { isMobile && (<MobileCamera imageContainer={ imageContainer } /> )}
+        { children }
 
       </section>
     </article>

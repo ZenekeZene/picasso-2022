@@ -1,8 +1,9 @@
 import { useRef, useState } from 'react'
 import brushesConfig from 'modules/paint/brushes'
 import Tools from 'modules/paint/tools/Tools'
-import DesktopCameraCanvas from 'modules/camera/desktop/canvas/DesktopCameraCanvas'
-import ImageCanvas from 'modules/image/ImageCanvas'
+import CameraTool from 'modules/camera/CameraTool'
+import ImageTool from 'modules/image/tool/ImageTool'
+import ImageViewer from 'modules/image/ImageViewer'
 import Filters from 'modules/paint/filters'
 import useHistory from 'modules/history/useHistory'
 import HistoryTools from 'modules/history/HistoryTools'
@@ -12,11 +13,11 @@ import './Painter.scss'
 const Painter = () => {
   const canvasRef = useRef(null)
   const toolsRef = useRef(null)
+  const [src, setSrc] = useState(null)
 
   const brushState = useState(null)
   const colorState = useState(null)
   const sizeState = useState(10)
-
   const paintState = { sizeState, colorState, brushState }
 
   const {
@@ -24,7 +25,7 @@ const Painter = () => {
     pointer,
     registerPath,
     adjustHistory
-  } = useHistory({ canvasRef, options: brushesConfig })
+  } = useHistory({ canvasRef, brushesConfig })
 
   const {
     handlers: paintHandlers,
@@ -54,14 +55,13 @@ const Painter = () => {
         isDrawing={ isDrawing }
         { ...paintState }
         { ...historyHandlers }
-      />
+      >
+        <CameraTool onLoad={ setSrc } />
+        <ImageTool onLoad={ setSrc } />
+        <HistoryTools { ...historyHandlers } />
+      </Tools>
 
-      <DesktopCameraCanvas toolsRef={ toolsRef } />
-      <ImageCanvas toolsRef={ toolsRef } />
-      <HistoryTools toolsRef={ toolsRef }
-        { ...historyHandlers }
-      />
-
+      <ImageViewer src={ src } />
     </main>
   )
 }

@@ -1,34 +1,5 @@
 @import 'icons/icons';
-
-html,
-body {
-  font-family: 'Open Sans', sans-serif;
-  color: #2c3e50;
-  height: 100%;
-}
-
-button,
-input {
-  position: relative;
-  z-index: 1;
-}
-
-.heading {
-  position: absolute;
-  top: 0;
-  left: 1rem;
-  z-index: 100;
-  line-height: 4rem;
-  font-weight: 300;
-  font-size: 2rem;
-  margin: 0;
-  padding: 0;
-  text-align: left;
-  font-family: 'Fredoka One', sans-serif;
-}
-
+@import './utils/utilities.scss';
+@import './utils/mixins.scss';
+@import './base.scss';
 @import './range.scss';
-
-.height-100 {
-  height: 100%;
-}

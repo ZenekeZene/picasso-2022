@@ -1,52 +1,27 @@
-import { useState, useRef } from 'react'
-import ReactDOM from 'react-dom'
-import Spinner from 'ui/components/spinner/Spinner'
-import './ImageTool.scss'
-
-const ImageTool = ({ imageContainer }) => {
-  const [imageLoaded, setImageLoaded] = useState(false)
-  const [isLoading, setIsLoading] = useState(false)
-  const imageSrc = useRef(null)
+const ImageTool = ({ onLoad }) => {
 
   const handleChange = (event) => {
-    setIsLoading(true)
     const selectedFile = event.target.files[0]
     const reader = new FileReader()
 
-    reader.onload = function (event) {
-      imageSrc.current = event.target.result
-      setIsLoading(false)
-      setImageLoaded(true)
+    reader.onload = (event) => {
+      onLoad(event.target.result)
     }
 
     reader.readAsDataURL(selectedFile)
   }
 
-  const removeMobileImage = () => {
-    imageSrc.current = null
-    setIsLoading(false)
-    setImageLoaded(false)
-  }
-
   return (
-    <section className="image-tool">
+    <section>
       <label htmlFor="image-file">
         <span className="icon-image"></span>
-        <input type="file" id="image-file" onChange={ handleChange } style={{ display: 'none' }} />
+        <input
+          type="file"
+          id="image-file"
+          onChange={ handleChange }
+          style={{ display: 'none' }}
+        />
       </label>
-
-      { imageLoaded && <span className="image-tool__remove icon-cross" onClick={ removeMobileImage }></span> }
-      { imageContainer.current && (
-        ReactDOM.createPortal(
-          <img
-            alt="Espacio disponible para albergar retratos del usuario"
-            src={ imageSrc.current }
-            style={{ opacity: imageLoaded ? 1 : 0 }}
-            className="image-tool__image"
-          />, imageContainer.current)
-        )}
-
-      { isLoading && <Spinner className="mobile-camera__spinner" />}
     </section>
   )
 }
