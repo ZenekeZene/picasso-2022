@@ -6,7 +6,7 @@ const CameraTool = ({ onLoad }) => {
   const isMobile = checkIsMobile()
 
   return (<>
-    { !isMobile && <DesktopCameraCanvas /> }
+    { !isMobile && <DesktopCameraCanvas onLoad={ onLoad } /> }
     { isMobile && <MobileCameraTool onLoad={ onLoad } /> }
   </>)
 }

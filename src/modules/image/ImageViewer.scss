@@ -29,4 +29,18 @@
     @include mixins.full-center;
     z-index: 1;
   }
+
+  &__canvas {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    z-index: -1;
+    width: 100%;
+    border: none;
+    transform: translate(-50%, -50%) scaleX(-1);
+
+    canvas {
+      width: 100%;
+    }
+  }
 }
