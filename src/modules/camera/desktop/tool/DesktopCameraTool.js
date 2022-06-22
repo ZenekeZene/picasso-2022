@@ -1,30 +1,25 @@
 import './DesktopCameraTool.scss'
 
+const getMedia = async () => await navigator.mediaDevices.getUserMedia({ video: true, audio: false })
+
 const CameraTool = ({ videoRef, isEnabled, enableCamera, onLoad }) => {
 
   const handleStartCamera = async () => {
-    const stream = await navigator.mediaDevices.getUserMedia({ video: true, audio: false })
+    const stream = await getMedia()
     videoRef.current.srcObject = stream
     enableCamera(true)
   }
 
   const handleTakeThePhoto = () => {
-    onLoad({ type: 'canvas', url: videoRef.current })
     enableCamera(false)
+    onLoad({ type: 'canvas', url: videoRef.current })
   }
 
-  return (<>
-    { !isEnabled && (
-      <span className="icon-camera"
-        onClick={ handleStartCamera }
-      />
-    )}
-    { isEnabled && (
-      <span className="camera icon-camera"
-        onClick={ handleTakeThePhoto }
-      ><span className="camera__label">Sacar foto</span></span>
-    )}
-  </>)
+  return (
+    <span className="icon-camera"
+      onClick={ isEnabled ? handleTakeThePhoto : handleStartCamera }
+    >{ isEnabled && <span className="desktop-camera-label">Sacar foto</span> }</span>
+  )
 }
 
 export default CameraTool

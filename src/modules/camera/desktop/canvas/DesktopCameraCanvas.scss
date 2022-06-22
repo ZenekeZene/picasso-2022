@@ -5,6 +5,7 @@
   height: auto;
   overflow: hidden;
   border-radius: 1rem;
+  animation: appear 1s;
 
   video {
     width: 100%;
@@ -23,3 +24,4 @@
     border-radius: 50%;
   }
 }
+

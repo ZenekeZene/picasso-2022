@@ -35,7 +35,7 @@ const ImageViewer = ({ src }) => {
   }
 
   useEffect(() => {
-    if (!src?.type) return
+    if (src?.type !== 'canvas') return
     createPhotoFromVideo(src.url)
   }, [src])
 
@@ -43,10 +43,10 @@ const ImageViewer = ({ src }) => {
     <section className="image-viewer">
       { imageLoaded && <span className="image-viewer__remove icon-cross" onClick={ removeImage }></span> }
 
-      { !src?.type && (
+      { src?.type === 'image' && (
         <img
           alt="Espacio disponible para albergar fotos del usuario"
-          src={ src }
+          src={ src.url }
           style={{ opacity: imageLoaded ? 1 : 0 }}
           className="image-viewer__image"
           onLoad={ onLoad }

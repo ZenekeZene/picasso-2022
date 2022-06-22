@@ -3,7 +3,7 @@ const MobileCameraTool = ({ onLoad }) => {
   const handleChange = (event) => {
     const file = event.target.files[0]
     const url = window.URL.createObjectURL(file)
-    onLoad(url)
+    onLoad({ type: 'image', url })
   }
 
   return (

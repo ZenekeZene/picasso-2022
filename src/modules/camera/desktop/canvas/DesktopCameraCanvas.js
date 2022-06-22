@@ -1,6 +1,16 @@
-import { useState, useRef } from 'react'
+import { useState, useRef, forwardRef } from 'react'
 import DesktopCameraTool from '../tool/DesktopCameraTool'
 import './DesktopCameraCanvas.scss'
+
+const DesktopVideo = forwardRef(({ cameraEnabled, onClose }, ref) => (
+  <article className="photo-video" style={{ display: cameraEnabled ? 'block': 'none' }}>
+    <span className="icon-cross" onClick={ onClose } />
+    <video
+      ref={ ref }
+      autoPlay
+    ></video>
+  </article>
+))
 
 const DesktopCameraCanvas = ({ onLoad }) => {
   const imageContainerRef = useRef(null)
@@ -15,14 +25,11 @@ const DesktopCameraCanvas = ({ onLoad }) => {
       enableCamera={ enableCamera }
       onLoad={ onLoad }
     />
-
-    <article className="photo-video" style={{ display: cameraEnabled ? 'block': 'none' }}>
-      <span className="icon-cross" onClick={ () => { enableCamera(false) }} />
-      <video
-        ref={ videoRef }
-        autoPlay
-      ></video>
-    </article>
+    <DesktopVideo
+      ref={ videoRef }
+      cameraEnabled={ cameraEnabled }
+      onClose={ () => { enableCamera(false) } }
+    />
   </>)
 }
 

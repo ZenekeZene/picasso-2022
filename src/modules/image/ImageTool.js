@@ -5,7 +5,7 @@ const ImageTool = ({ onLoad }) => {
     const reader = new FileReader()
 
     reader.onload = (event) => {
-      onLoad(event.target.result)
+      onLoad({ type: 'image', url: event.target.result })
     }
 
     reader.readAsDataURL(selectedFile)
