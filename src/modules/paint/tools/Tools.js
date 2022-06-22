@@ -1,27 +1,22 @@
-import { useState, useRef } from 'react'
-import CameraTool from 'modules/paint/tools/camera/CameraTool'
+import { useState, forwardRef } from 'react'
 import ColorsTool from 'modules/paint/tools/color/ColorsTool'
 import SizeTool from 'modules/paint/tools/size/SizeTool'
 import BrushTool from 'modules/paint/tools/brush/BrushTool'
 import MobileCamera from 'modules/camera/mobile/MobileCamera'
-import ImageTool from 'modules/paint/tools/image/ImageTool'
 import HistoryTools from 'modules/paint/tools/history/HistoryTools'
 import checkIsMobile from 'adapter/Mobile.Checker'
 import useOnClickOutside from 'hooks/useOnClickOutside'
 
 import './Tools.scss'
 
-const Tools = ({
+const Tools = forwardRef(({
   isDrawing,
   color, onColor,
   onBrush,
   size, onSize,
-  isCameraEnabled,
   onUndo, onRedo, onDelete,
-  onStartCamera, onTakeThePhoto,
   imageContainer,
-}) => {
-  const ref = useRef(null)
+}, ref) => {
   const sectionsState = useState(false)
   const [areSectionsVisibled, setSectionsVisibled] = sectionsState
   const isMobile = checkIsMobile()
@@ -33,10 +28,9 @@ const Tools = ({
 
   return (
     <section className="tools-wrapper"
-      ref={ ref }
       style={{ opacity: isDrawing ? 0.2 : 1 }}
     >
-      <article className="tools">
+      <article className="tools" ref={ ref }>
 
         <ColorsTool
           onColor={ onColor }
@@ -53,18 +47,8 @@ const Tools = ({
           onBrush={ onBrush }
           sectionsState={ sectionsState }
         />
-        <ImageTool imageContainer={ imageContainer } />
+
         { isMobile && (<MobileCamera imageContainer={ imageContainer } /> )}
-        { !isMobile && (
-          <CameraTool
-            isEnabled={ isCameraEnabled }
-            onStartCamera={ () => {
-              setSectionsVisibled(false)
-              onStartCamera()
-            }}
-            onTakeThePhoto={ onTakeThePhoto }
-          />
-        )}
         <HistoryTools
           onUndo={ onUndo }
           onRedo={ onRedo }
@@ -74,6 +58,6 @@ const Tools = ({
       </article>
     </section>
   )
-}
+})
 
 export default Tools

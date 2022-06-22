@@ -1,14 +1,18 @@
-import './CameraTool.scss'
+import './DesktopCameraTool.scss'
 
-const CameraTool = ({ isEnabled, onStartCamera, onTakeThePhoto }) => {
+const CameraTool = ({ imageContainerRef, videoRef, isEnabled, enableCamera, setImageLoaded }) => {
 
   const handleStartCamera = async () => {
     const stream = await navigator.mediaDevices.getUserMedia({ video: true, audio: false })
-    onStartCamera(stream)
+    videoRef.current.srcObject = stream
+    enableCamera(true)
   }
 
   const handleTakeThePhoto = () => {
-   	onTakeThePhoto()
+    imageContainerRef.current.getContext('2d').drawImage(videoRef.current, 0, 0, imageContainerRef.current.width, imageContainerRef.current.height)
+   	imageContainerRef.current.toDataURL('image/jpeg')
+    setImageLoaded(true)
+    enableCamera(false)
   }
 
   return (<>

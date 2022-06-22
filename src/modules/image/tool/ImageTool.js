@@ -1,6 +1,7 @@
 import { useState, useRef } from 'react'
 import ReactDOM from 'react-dom'
 import Spinner from 'ui/components/spinner/Spinner'
+import './ImageTool.scss'
 
 const ImageTool = ({ imageContainer }) => {
   const [imageLoaded, setImageLoaded] = useState(false)
@@ -34,14 +35,14 @@ const ImageTool = ({ imageContainer }) => {
         <input type="file" id="image-file" onChange={ handleChange } style={{ display: 'none' }} />
       </label>
 
-      { imageLoaded && <span className="mobile-camera__remove icon-cross" onClick={ removeMobileImage }></span> }
+      { imageLoaded && <span className="image-tool__remove icon-cross" onClick={ removeMobileImage }></span> }
       { imageContainer.current && (
         ReactDOM.createPortal(
           <img
             alt="Espacio disponible para albergar retratos del usuario"
             src={ imageSrc.current }
-            className="mobile-camera__image"
             style={{ opacity: imageLoaded ? 1 : 0 }}
+            className="image-tool__image"
           />, imageContainer.current)
         )}
 
