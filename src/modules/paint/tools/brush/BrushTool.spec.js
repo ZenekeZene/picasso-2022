@@ -5,20 +5,24 @@ import BrushTool from './BrushTool'
 const wait = () => new Promise(resolve => setTimeout(resolve))
 
 describe('BrushTool', () => {
+  const propsDummy = {
+    setBrush: () => {}
+  }
+
   it(`shows the brush list is the sections are visible`, () => {
+    const areSectionsVisibled = true
     const { getAllByRole } = render(<BrushTool
-      setBrush={ () => {} }
-      areSectionsVisibled={ true }
-      setSectionsVisibled={ () => {} }
+      { ...propsDummy }
+      sectionsState={ [areSectionsVisibled, () => {}] }
     />)
     expect(getAllByRole('listitem')).toHaveLength(4)
   })
 
   it(`shows the pencil brush by default`, () => {
+    const areSectionsVisibled = false
     const { getByTestId } = render(<BrushTool
-      setBrush={ () => {} }
-      areSectionsVisibled={ false }
-      setSectionsVisibled={ () => {} }
+      { ...propsDummy }
+      sectionsState={ [areSectionsVisibled, () => {}] }
     />)
     const currentBrush = getByTestId('currentBrush')
     expect(currentBrush).toBeInTheDocument()
@@ -26,20 +30,20 @@ describe('BrushTool', () => {
   })
 
   it(`shows the selected brush if the user click on it`, () => {
+    let areSectionsVisibled = true
     const { getAllByRole, getByTestId, rerender } = render(<BrushTool
-      setBrush={ () => {} }
-      areSectionsVisibled={ true }
-      setSectionsVisibled={ () => {} }
+      { ...propsDummy }
+      sectionsState={ [areSectionsVisibled, () => {}] }
     />)
 
     const items = getAllByRole('listitem')
     const quill = items[2]
     act(() => { fireEvent.click(quill) })
 
+    areSectionsVisibled = false
     rerender(<BrushTool
-      setBrush={ () => {} }
-      areSectionsVisibled={ false }
-      setSectionsVisibled={ () => {} }
+      { ...propsDummy }
+      sectionsState={ [areSectionsVisibled, () => {}] }
     />)
 
     const currentBrush = getByTestId('currentBrush')
