@@ -40,7 +40,7 @@ const ImageViewer = ({ src }) => {
   }, [src])
 
   return (
-    <section className="image-viewer" ref={ ref }>
+    <section className="image-viewer">
       { imageLoaded && <span className="image-viewer__remove icon-cross" onClick={ removeImage }></span> }
 
       { !src?.type && (
