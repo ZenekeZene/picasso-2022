@@ -23,7 +23,7 @@ const usePaint = ({ canvasRef, pointer, paintState, brushesConfig, registerPath,
   }
 
   const onPointerMove = (event) => {
-    if (event.buttons !== 1) return
+    if (event.buttons !== 1 || !currentPath) return
     setPoints([...points, [event.pageX, event.pageY, event.pressure]])
     currentPath?.setAttribute('d', getSvgPathFromStroke(getStroke(points, brushesConfig[brush])))
     canvasRef.current.appendChild(currentPath)
