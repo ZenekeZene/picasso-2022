@@ -18,7 +18,7 @@ const useObserverDOM = (ref, callback) => {
       observer.current.disconnect()
     })
 
-  }, [])
+  }, [ref, callback])
 }
 
 export default useObserverDOM
