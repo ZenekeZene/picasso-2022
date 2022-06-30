@@ -1,8 +1,5 @@
-import { useState } from 'react'
 import { fireEvent, render, act } from '@testing-library/react'
 import BrushTool from './BrushTool'
-
-const wait = () => new Promise(resolve => setTimeout(resolve))
 
 describe('BrushTool', () => {
   const propsDummy = {

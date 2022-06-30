@@ -20,9 +20,10 @@ const SizeTool = ({
 
   return (
     <section className={ `size-tool ${!areSectionsVisibled ? '--mini': '' }` }>
-      <span className="size-tool__value" onClick={ () => { setSectionsVisibled(true) }}>{ currentSize }</span>
+      <label htmlFor="size" className="size-tool__value" onClick={ () => { setSectionsVisibled(true) }}>{ currentSize }</label>
       { areSectionsVisibled && (<>
         <input
+          id="size"
           className="size-tool__range"
           type="range"
           min="1"
@@ -32,7 +33,11 @@ const SizeTool = ({
             setCurrentSize(event.target.value)
           }}
         />
-        <span style={ style } className="size-tool__preview" />
+        <span
+          role="figure"
+          style={ style }
+          className="size-tool__preview"
+        />
       </>)}
     </section>
   )
