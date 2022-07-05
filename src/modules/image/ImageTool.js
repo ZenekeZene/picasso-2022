@@ -19,7 +19,9 @@ const ImageTool = ({ onLoad }) => {
           type="file"
           id="image-file"
           onChange={ handleChange }
-          style={{ display: 'none' }}
+          style={{ opacity: 0, width: 0 }}
+          role="button"
+          aria-label="File Upload"
         />
       </label>
     </section>

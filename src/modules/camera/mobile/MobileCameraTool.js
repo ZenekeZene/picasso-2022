@@ -17,7 +17,8 @@ const MobileCameraTool = ({ onLoad }) => {
           accept="image/*"
           capture="environment"
           onChange={ handleChange }
-          style={{ display: 'none' }}
+          style={{ opacity: 0 }}
+          role="button"
         />
       </label>
     </section>

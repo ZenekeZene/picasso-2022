@@ -18,6 +18,7 @@ const CameraTool = ({ videoRef, isEnabled, enableCamera, onLoad }) => {
   return (
     <span className="icon-camera"
       onClick={ isEnabled ? handleTakeThePhoto : handleStartCamera }
+      data-testid="camera-tool"
     >{ isEnabled && <span className="desktop-camera-label">Sacar foto</span> }</span>
   )
 }

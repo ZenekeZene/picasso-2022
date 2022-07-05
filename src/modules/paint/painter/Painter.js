@@ -45,6 +45,7 @@ const Painter = () => {
       <svg
         className="canvas-svg"
         ref={ canvasRef }
+        role="application"
         { ...paintHandlers }
       >
         <Filters />
